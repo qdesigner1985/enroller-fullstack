@@ -100,6 +100,11 @@ public class MeetingRestController {
         }
 
         Participant participantToAdd = participantService.findByLogin(login);
+        if (participantToAdd == null) {
+            participantToAdd = new Participant();
+            participantToAdd.setLogin(login);
+            participantToAdd = participantService.add(participantToAdd);
+        }
         currentMeeting.addParticipant(participantToAdd);
         meetingService.update(currentMeeting);
 

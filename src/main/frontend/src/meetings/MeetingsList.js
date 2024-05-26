@@ -5,7 +5,6 @@ export default function MeetingsList({meetings, username, onDelete, onSignOut, o
         <table>
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Nazwa spotkania</th>
                 <th>Opis</th>
                 <th>Uczestnicy</th>
@@ -15,25 +14,22 @@ export default function MeetingsList({meetings, username, onDelete, onSignOut, o
             <tbody>
             {
                 meetings.map((meeting, index) => <tr key={index}>
-                    <td>{meeting.id}</td>
                     <td>{meeting.title}</td>
                     <td>{meeting.description}</td>
                     <td>
                         {
                             meeting.participants.length > 0
-                                ? <ul>{meeting.participants.map(p => <li key={p}>{p}</li>)}</ul>
+                                ? <ul>{meeting.participants.map(p => <li key={p.id}>{p.login}</li>)}</ul>
                                 : <em>Brak uczestników</em>
                         }
                     </td>
                     <td>
-
                         <MeetingButtons meeting={meeting}
                                         username={username}
                                         onDelete={() => onDelete(meeting)}
                                         onSignIn={() => onSignIn(meeting)}
                                         onSignOut={() => onSignOut(meeting)}/>
                     </td>
-
                 </tr>)
             }
             </tbody>
